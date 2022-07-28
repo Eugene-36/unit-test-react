@@ -1,26 +1,28 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-// const User = () => {
-//   const [users, setUsers] = useState([]);
+import axios from 'axios';
 
-//   const loadUsers = async () => {
-//     const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
-//     setUsers(resp.data);
-//   };
-//   useEffect(() => {
-//     loadUsers();
-//   }, []);
+const User = () => {
+  const [users, setUsers] = useState([]);
 
-//   return (
-//     <div>
-//       {users.map((user) => (
-//         <div key={user.id} data-testid='user-item'>
-//           {user.name}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+  const loadUsers = async () => {
+    const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
+    setUsers(resp.data);
+  };
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
-// export default User;
+  return (
+    <div>
+      {users.map((user) => (
+        <Link to={`/users/${user.id}`} key={user.id} data-testid='user-item'>
+          {user.name}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+export default User;
